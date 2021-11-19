@@ -29,10 +29,10 @@ class TestApplicationTests {
 	{
 		List<Person>p=new ArrayList<>();
 		p.add(new Person(101,"girish","kumar"));
-		//p.add(new Person(102,"lohith","kumar"));
+		p.add(new Person(102,"lohith","kumar"));
 		
 		when(personRepository.findAll()).thenReturn(p);
-		assertEquals(1, personService.getAllPerson().size());
+		assertEquals(2, personService.getAllPerson().size());
 		
 	}
 	@Test
