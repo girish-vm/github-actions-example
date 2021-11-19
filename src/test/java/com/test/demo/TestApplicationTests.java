@@ -1,10 +1,12 @@
 package com.test.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +45,20 @@ class TestApplicationTests {
 	assertEquals(p, personService.savePerson(p));
 	}
 	
+	@Test
+	public void getPersonById()
+	{
+	int id=102;
+	/*
+	 * Optional<Person> p=Optional.of(new Person(102,"laa","kumar"));
+	 * when(personRepository.findById(id)).thenReturn(p); Optional<Person>
+	 * pe=personService.getPersonByid(102);
+	 */
+	Person pMock=new Person(102,"girish","kuma");
+	doReturn(Optional.of(pMock)).when(personRepository).findById(id);
+	Optional<Person> pe=personService.getPersonByid(102);
+	assertEquals(id,pe.get().getId());
+	}
 	
 	
 }
