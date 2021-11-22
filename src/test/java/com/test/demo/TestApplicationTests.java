@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ class TestApplicationTests {
 	when(personRepository.save(p)).thenReturn(p);
 	assertEquals(p, personService.savePerson(p));
 	}
-	
+	@DisplayName("do return using id only")
 	@Test
 	public void getPersonById()
 	{
