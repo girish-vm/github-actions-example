@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.demo.Service.PersonService;
 import com.test.demo.entity.Person;
+import com.test.demo.exception.PersonNotFoundException;
 
 /**
  * @author 002SQF744
@@ -24,27 +25,29 @@ import com.test.demo.entity.Person;
 public class TestController {
 	@Autowired
 	PersonService personService;
-	
+
 	@PostMapping("/savePerson")
-	public Person savePerson(@RequestBody Person person)
-	{
+	public Person savePerson(@RequestBody Person person) {
 		return personService.savePerson(person);
-		
-	}
-	
-	@GetMapping("/getAllPersons")
-	public List<Person>getAllPerson()
-	{
-		return personService.getAllPerson();
-	}
-	
-	
-	@GetMapping("/getPerson/{id}")
-	public Optional<Person> getPersonByid(@PathVariable("id")int id)
-	{
-		return personService.getPersonByid(id);
-		
+
 	}
 
-	
+	@GetMapping("/getAllPersons")
+	public List<Person> getAllPerson() {
+		try {
+			return personService.getAllPerson();
+		} catch (PersonNotFoundException personNotFoundException) {
+			System.out.println(personNotFoundException.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+		return personService.getAllPerson();
+	}
+
+	@GetMapping("/getPerson/{id}")
+	public Optional<Person> getPersonByid(@PathVariable("id") int id) {
+		return personService.getPersonByid(id);
+
+	}
+
 }

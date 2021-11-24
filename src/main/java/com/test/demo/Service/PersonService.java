@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.test.demo.Repository.PersonRepository;
 import com.test.demo.entity.Person;
+import com.test.demo.exception.PersonNotFoundException;
 
 /**
  * @author 002SQF744
@@ -24,27 +25,27 @@ import com.test.demo.entity.Person;
 public class PersonService {
 	@Autowired
 	PersonRepository personRepository;
-	
-	public Person savePerson(Person p)
-	{
+
+	public Person savePerson(Person p) {
 		return personRepository.save(p);
-		
-	}
-	
 
-	
-	public List<Person>getAllPerson()
-	{
-	List<Person>g= personRepository.findAll();
-	System.out.println("person count"+g);
-	return g;
 	}
 
+	public List<Person> getAllPerson() throws PersonNotFoundException {
+		List<Person> g = personRepository.findAll();
+		if (g != null) {
+			return g;
+		}
+		{
+			throw new PersonNotFoundException("dats is not existed!!! it is empty in db");
+		}
+		// System.out.println("person count"+g);
 
+	}
 
 	public Optional<Person> getPersonByid(int id) {
 		// TODO Auto-generated method stub
 		return personRepository.findById(id);
 	}
-	
+
 }
