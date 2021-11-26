@@ -49,5 +49,18 @@ public class TestController {
 		return personService.getPersonByid(id);
 
 	}
+	
+	@GetMapping("/getPersonsByName/{name}")
+	public List<Person> getAllPersonByName(@PathVariable("name")String name) {
+		try {
+			return personService.getPeronsByName(name);
+		} catch (PersonNotFoundException personNotFoundException) {
+			System.out.println(personNotFoundException.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+		return personService.getPeronsByName(name);
+	}
+	
 
 }
