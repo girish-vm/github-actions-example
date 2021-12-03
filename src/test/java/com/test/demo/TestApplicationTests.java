@@ -1,6 +1,7 @@
 package com.test.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.test.demo.Repository.PersonRepository;
 import com.test.demo.Service.PersonService;
 import com.test.demo.entity.Person;
+import com.test.demo.exception.PersonNotFoundException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,6 +40,20 @@ class TestApplicationTests {
 		assertEquals(2, personService.getAllPerson().size());
 
 	}
+	
+
+	@Test()
+	public void getPersonTestException() {
+		
+		List<Person> p = new ArrayList<>();
+		p.add(null);
+		when(personRepository.findAll()).thenThrow(PersonNotFoundException.class);
+		assertThrows(PersonNotFoundException.class,()->personService.getAllPerson());
+		
+
+	}
+	
+	
 
 	@Test
 	public void savePerson() {
