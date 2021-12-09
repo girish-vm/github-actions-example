@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.test.demo.Repository.PersonRepository;
+import com.test.demo.dto.PersonDto;
 import com.test.demo.entity.Person;
 import com.test.demo.exception.PersonNotFoundException;
 
@@ -23,8 +24,9 @@ public class PersonService {
 	@Autowired
 	PersonRepository personRepository;
 
-	public Person savePerson(Person p) {
-		return personRepository.save(p);
+	public Person savePerson(PersonDto p) {
+		Person person=new Person(p.getId(),p.getFirstName(),p.getLastName());
+		return personRepository.save(person);
 
 	}
 

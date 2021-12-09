@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.test.demo.Repository.PersonRepository;
 import com.test.demo.Service.PersonService;
+import com.test.demo.dto.PersonDto;
 import com.test.demo.entity.Person;
 import com.test.demo.exception.PersonNotFoundException;
 
@@ -58,8 +59,10 @@ class TestApplicationTests {
 	@Test
 	public void savePerson() {
 		Person p = new Person(102, "laa", "kumar");
+		PersonDto dto=new PersonDto();
+		dto.setFirstName("laa");dto.setId(101);dto.setLastName("kumar");
 		when(personRepository.save(p)).thenReturn(p);
-		assertEquals(p, personService.savePerson(p));
+		assertEquals(p, personService.savePerson(dto));
 	}
 
 	@DisplayName("do return using id only")
