@@ -11,14 +11,20 @@ import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.NoArgsConstructor;
+
 /**
  * @author 002SQF744
  *
  */
+
 @Document(collection = "Person")
 public class Person {
 	
-	  @Id 
+	  public Person() {
+		super();
+	}
+	@Id 
 	private int id;
 	private String firstName;
 	private String lastName;
