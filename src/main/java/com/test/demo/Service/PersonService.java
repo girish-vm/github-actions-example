@@ -25,7 +25,7 @@ public class PersonService {
 	PersonRepository personRepository;
 
 	public Person savePerson(PersonDto p) {
-		Person person=new Person(p.getId(),p.getFirstName(),p.getLastName());
+		Person person = new Person(p.getId(), p.getFirstName(), p.getLastName(),p.getPhoneNumbers());
 		return personRepository.save(person);
 
 	}
@@ -44,12 +44,11 @@ public class PersonService {
 
 	public Optional<Person> getPersonByid(int id) {
 		// TODO Auto-generated method stub
-		//return personRepository.findById(id);
+		// return personRepository.findById(id);
 		return personRepository.findByidUsingQuery(id);
 	}
-	
-	public List<Person>getPeronsByName(String name)
-	{
+
+	public List<Person> getPeronsByName(String name) {
 		return personRepository.getPersonsByName(name);
 	}
 
